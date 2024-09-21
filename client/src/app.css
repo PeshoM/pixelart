@@ -1,0 +1,120 @@
+.mainDiv {
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: 50pt;
+  padding: 0;
+  margin: 0;
+}
+
+.mainLabel {
+  font-size: 20pt;
+}
+
+.colorsDiv {
+  border: 2px solid black;
+  width: 30vw;
+  height: 3vw;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+}
+
+.colors {
+  width: 3vw;
+  height: 3vw;
+}
+
+.colors:hover {
+  opacity: 0.4;
+}
+
+.red {
+  background: red !important;
+}
+
+.pink {
+  background: rgb(241, 145, 220) !important;
+}
+
+.purple {
+  background: purple !important;
+}
+
+.blue {
+  background: rgb(5, 168, 255) !important;
+}
+
+.cyan {
+  background: rgb(52, 87, 87) !important;
+}
+
+.green {
+  background: green !important;
+}
+
+.yellow {
+  background: yellow !important;
+}
+
+.orange {
+  background: rgb(249, 152, 15) !important;
+}
+
+.white {
+  background: #fff !important;
+}
+
+.black {
+  background: #000 !important;
+}
+
+.array {
+  display: inline;
+}
+.mainArray {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.elements {
+  margin: 0px;
+  border: 1px solid #fff;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  background: rgb(197, 195, 195);
+}
+
+.elements:hover {
+  opacity: 0.4;
+}
+
+.toolsMenuDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.toolsImgDiv {
+  width: 50px;
+  height: 50px;
+}
+
+.toolsImg {
+  width: 100%;
+  height: 100%;
+}
+
+.toolsImg:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
