@@ -4,8 +4,8 @@ import cors from 'cors';
 const app: Express = express();
 const port = process.env.PORT || 8000;
 
-app.use(cors({ origin: '*'}));
+app.use(cors({ origin: "*"}));
 
 app.listen(port, () => {
-  console.log('server is on', port);
+    console.log("server is running on", port);
 });
