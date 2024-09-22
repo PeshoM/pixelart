@@ -9,5 +9,3 @@ app.use(cors({ origin: "*"}));
 app.listen(port, () => {
     console.log("server is running on", port);
 });
-
-// sloji dist v .gitignore

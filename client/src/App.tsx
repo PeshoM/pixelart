@@ -60,6 +60,11 @@ function App() {
     setTools(tool);
   };
 
+  const handleBrushClick = (row: number, col: number) => {
+    arr[row][col] = color;
+    setArr(() => [...arr]);
+  };
+
   return (
     <div className="mainDiv">
       <h1 className="mainTitle">pixelart</h1>
@@ -100,6 +105,7 @@ function App() {
                       key={col}
                       className="elements"
                       style={{ backgroundColor: arr[row][col] }}
+                      onClick={() => handleBrushClick(row, col)}
                     ></div>
                   );
                 })}
