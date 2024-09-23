@@ -51,6 +51,7 @@ function App() {
   );
   const [color, setColors] = useState<string>(COLORS.Red);
   const [tools, setTools] = useState<ToolsType>(TOOLS.Brush);
+  const [held, setHeld] = useState<boolean>(false);
 
   const handleColorChange = (color: string) => {
     setColors(color);
@@ -64,6 +65,16 @@ function App() {
     arr[row][col] = color;
     setArr(() => [...arr]);
   };
+
+  const handleMouseOver = (clickedRow: number, clickedCol: number) => {
+    return (
+      held &&
+      (tools === TOOLS.Brush) &&
+      handleBrushClick(clickedRow, clickedCol)
+    );
+  };
+
+  const handleMouseDown = () => setHeld(true);
 
   return (
     <div className="mainDiv">
@@ -106,6 +117,8 @@ function App() {
                       className="elements"
                       style={{ backgroundColor: arr[row][col] }}
                       onClick={() => handleBrushClick(row, col)}
+                      onMouseDown={handleMouseDown}
+                      onMouseOver={() => handleMouseOver(row, col)}
                     ></div>
                   );
                 })}
