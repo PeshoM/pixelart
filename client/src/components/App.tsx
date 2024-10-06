@@ -4,7 +4,6 @@ import { COLORS } from "../enums/colors.enum";
 import { TOOLS, ToolsType } from "../enums/tools.enum";
 import { useDraw } from "./useDraw";
 
-
 function App() {
   let colorsArr = [
     COLORS.Red,

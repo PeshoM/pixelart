@@ -19,8 +19,8 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    socket.on('board', (updatedBoard) => {
-        socket.emit('board', updatedBoard);
+    socket.on('board-update', (updatedBoard) => {
+        socket.broadcast.emit('board-update', updatedBoard);
     });
 
     socket.on('disconnect', () => {
