@@ -74,8 +74,9 @@
   display: inline;
 }
 .mainArray {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  border: 3px solid #000;
 }
 
 .row {
@@ -117,4 +118,12 @@
 .toolsImg:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.activeTool {
+  opacity: 0.4;
+}
+
+.activeColor {
+  opacity: 0.4;
 }

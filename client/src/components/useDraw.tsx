@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
-import { COLORS } from "../enums/colors.enum";
+import { COLORS, ColorsType } from "../enums/colors.enum";
 import { TOOLS, ToolsType } from "../enums/tools.enum";
 import socket from '../socket';
 
 const useDraw = () => {
   let rows: number = 20,
     cols: number = 20;
-  const [arr, setArr] = useState<Array<string[]>>(
-    Array.from({ length: rows }, () => Array(cols).fill(""))
+  const [arr, setArr] = useState<Array<ColorsType[]>>(
+    Array.from({ length: rows }, () => Array<ColorsType>(cols).fill(COLORS.Empty))
   );
-  const [color, setColors] = useState<string>(COLORS.Red);
+  const [color, setColors] = useState<ColorsType>(COLORS.Red);
   const [tools, setTools] = useState<ToolsType>(TOOLS.Brush);
   const [held, setHeld] = useState<boolean>(false);
+  const [activeColor, setActiveColor] = useState<ColorsType>(COLORS.Red);
+  const [activeTool, setActiveTool] = useState<ToolsType>(TOOLS.Brush);
 
   useEffect(() => {
     socket.connect();
 
-    socket.on('board-update', (updatedBoard: string[][]) => {
+    socket.on('board-update', (updatedBoard: ColorsType[][]) => {
       console.log('Received updated board from server:', updatedBoard);
       setArr(updatedBoard);
     });
@@ -27,16 +29,18 @@ const useDraw = () => {
     };
   }, []);
 
-  const handleColorChange = (color: string) => {
+  const handleColorChange = (color: ColorsType) => {
     setColors(color);
+    setActiveColor(color);
   };
 
   const handleToolChange = (tool: ToolsType) => {
     setTools(tool);
+    setActiveTool(tool);
   };
 
   const handleBrushClick = (row: number, col: number) => {
-    let newBoard: string[][] = [...arr];
+    let newBoard: ColorsType[][] = [...arr];
     newBoard[row][col] = color;
     setArr(newBoard);
     socket.emit('board-update', newBoard);
@@ -112,13 +116,14 @@ const useDraw = () => {
   };
 
   const handleEyedropperClick = (clickedRow: number, clickedCol: number) => {
-    if (arr[clickedRow][clickedCol] === "") return;
+    if (arr[clickedRow][clickedCol] === COLORS.Empty) return;
     setColors(arr[clickedRow][clickedCol]);
+    setActiveColor(arr[clickedRow][clickedCol]);
   };
 
   const handleEraserClick = (clickedRow: number, clickedCol: number) => {
-    let newBoard: string[][] = [...arr];
-    newBoard[clickedRow][clickedCol] = "";
+    let newBoard: ColorsType[][] = [...arr];
+    newBoard[clickedRow][clickedCol] = COLORS.Empty;
     setArr(newBoard);
     socket.emit('board-update', newBoard);
   };
@@ -136,6 +141,8 @@ const useDraw = () => {
 
   return {
     arr,
+    activeColor,
+    activeTool,
     handleToolChange,
     handleColorChange,
     handleMouseUp,

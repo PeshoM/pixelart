@@ -1,5 +1,5 @@
 import "../styles/app.css";
-import { COLORS } from "../enums/colors.enum";
+import { COLORS, ColorsType } from "../enums/colors.enum";
 import { TOOLS, ToolsType } from "../enums/tools.enum";
 import { useDraw } from "./useDraw";
 
@@ -10,11 +10,11 @@ function App() {
     COLORS.Purple,
     COLORS.Blue,
     COLORS.Cyan,
-    COLORS.Greem,
+    COLORS.Green,
     COLORS.Yellow,
     COLORS.Orange,
     COLORS.White,
-    COLORS.Black,
+    COLORS.Black
   ];
   
   let toolsElements: ToolsType[] = [
@@ -25,6 +25,8 @@ function App() {
   ];
   const {
     arr,
+    activeColor,
+    activeTool,
     handleToolChange,
     handleColorChange,
     handleMouseUp,
@@ -38,10 +40,10 @@ function App() {
       <h1 className="mainTitle">pixelart</h1>
       <div className="mainLabel">Pick a Color</div>
       <div className="colorsDiv">
-        {colorsArr.map((color: string) => {
+        {colorsArr.map((color: ColorsType) => {
           return (
             <div
-              className={color + " colors"}
+              className={`${color} colors ${activeColor === color ? "activeColor" : ""}`}
               onClick={() => {
                 handleColorChange(color);
               }}
@@ -57,7 +59,7 @@ function App() {
               handleToolChange(tool);
             }}
           >
-            <img className="toolsImg" src={`../icons8-${tool}-100.png`}></img>
+            <img className={`toolsImg ${activeTool === tool ? "activeTool" : ""}`} src={`../icons8-${tool}-100.png`}></img>
           </div>
         ))}
       </div>
