@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "../styles/app.css";
 import { COLORS } from "../enums/colors.enum";
 import { TOOLS, ToolsType } from "../enums/tools.enum";
@@ -68,7 +67,7 @@ function App() {
           arr.map((array: string[], row: number) => {
             return (
               <div className="array" key={row}>
-                {array.map((elements: string, col: number) => {
+                {array.map((_elements: string, col: number) => {
                   return (
                     <div
                       key={col}

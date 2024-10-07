@@ -27,10 +27,6 @@ const useDraw = () => {
     };
   }, []);
 
-  useEffect( () => {
-    console.log("board changed", arr);
-  }, [arr]);
-
   const handleColorChange = (color: string) => {
     setColors(color);
   };
@@ -41,7 +37,7 @@ const useDraw = () => {
 
   const handleBrushClick = (row: number, col: number) => {
     let newBoard: string[][] = [...arr];
-    arr[row][col] = color;
+    newBoard[row][col] = color;
     setArr(newBoard);
     socket.emit('board-update', newBoard);
   };
@@ -49,7 +45,7 @@ const useDraw = () => {
   const handleMouseOver = (clickedRow: number, clickedCol: number) => {
     return (
       held &&
-      tools === TOOLS.Brush &&
+      (tools === TOOLS.Brush || tools === TOOLS.Eraser) &&
       map.get(tools)?.(clickedRow, clickedCol)
     );
   };
@@ -116,10 +112,16 @@ const useDraw = () => {
   };
 
   const handleEyedropperClick = (clickedRow: number, clickedCol: number) => {
+    if (arr[clickedRow][clickedCol] === "") return;
     setColors(arr[clickedRow][clickedCol]);
   };
 
-  const handleEraserClick = () => { };
+  const handleEraserClick = (clickedRow: number, clickedCol: number) => {
+    let newBoard: string[][] = [...arr];
+    newBoard[clickedRow][clickedCol] = "";
+    setArr(newBoard);
+    socket.emit('board-update', newBoard);
+  };
 
   const handleBoardClick = (clickedRow: number, clickedCol: number) => {
     map.get(tools)?.(clickedRow, clickedCol);
