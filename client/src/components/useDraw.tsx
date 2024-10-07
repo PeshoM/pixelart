@@ -3,8 +3,6 @@ import { COLORS } from "../enums/colors.enum";
 import { TOOLS, ToolsType } from "../enums/tools.enum";
 import socket from '../socket';
 
-const SERVER_URL: string = 'http://localhost:8000';
-
 const useDraw = () => {
   let rows: number = 20,
     cols: number = 20;
@@ -117,7 +115,9 @@ const useDraw = () => {
     socket.emit('board-update', res);
   };
 
-  const handleEyedropperClick = () => { };
+  const handleEyedropperClick = (clickedRow: number, clickedCol: number) => {
+    setColors(arr[clickedRow][clickedCol]);
+  };
 
   const handleEraserClick = () => { };
 
